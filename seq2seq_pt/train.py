@@ -51,7 +51,11 @@ if opt.gpus:
     cuda.set_device(opt.gpus[0])
 
 logger.info('My seed is {0}'.format(torch.initial_seed()))
-logger.info('My cuda seed is {0}'.format(torch.cuda.initial_seed()))
+
+if opt.gpus:
+    if opt.cuda_seed > 0:
+        # only when gpu used, set cuda seed
+        logger.info('My cuda seed is {0}'.format(torch.cuda.initial_seed()))
 
 
 def NMTCriterion(vocabSize):

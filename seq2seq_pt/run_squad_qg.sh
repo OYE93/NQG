@@ -2,8 +2,10 @@
 
 set -x
 
-DATAHOME=${@:(-2):1}
-EXEHOME=${@:(-1):1}
+# DATAHOME=${@:(-2):1}
+DATAHOME="../../../data/redistribute/QG"
+# EXEHOME=${@:(-1):1}
+EXEHOME=$"./"
 
 SAVEPATH=${DATAHOME}/models/NQG_plus
 
@@ -26,10 +28,9 @@ python train.py \
        -batch_size 64 \
        -beam_size 5 \
        -epochs 20 -optim adam -learning_rate 0.001 \
-       -gpus 0 \
        -curriculum 0 -extra_shuffle \
        -start_eval_batch 1000 -eval_per_batch 500 -halve_lr_bad_count 3 \
-       -seed 12345 -cuda_seed 12345 \
+       -seed 12345 \
        -log_interval 100 \
        -dev_input_src ${DATAHOME}/dev/dev.txt.shuffle.dev.source.txt \
        -dev_bio ${DATAHOME}/dev/dev.txt.shuffle.dev.bio \
